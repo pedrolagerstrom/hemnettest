@@ -1,0 +1,70 @@
+﻿@model IEnumerable<HemnetMVC.Models.HouseObjectViewModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/IndexFinal.css">
+    <title>Document</title>
+
+</head>
+<body>
+    <div class="main">
+        <div class="searchbar">
+            <form autocomplete="off" method="post" action="" style="outline:none">
+                <p>Address:</p>
+                @Html.TextBox("sortAddress", "", new { placeholder = "Sök på address" }) <br />
+            </form>
+            <form autocomplete="off" method="post" action="" style="outline:none">
+                <p>Maxpris:</p>
+                @Html.TextBox("sortPrice", "", new { type = "number", min = "500000", step = "500000", placeholder = "Sök på pris (SEK)" })
+            </form>
+            <form autocomplete="off" method="post" action="" style="outline:none">
+                <p>Minst antal rum:</p>
+                @Html.TextBox("sortRooms", "", new { type = "number", min = "1", step = "1", placeholder = "Sök på antal rum" })
+            </form>
+            <form autocomplete="off" method="post" action="" style="outline:none">
+                <p>Minst m²:</p>
+                @Html.TextBox("sortLivingArea", "", new { type = "number", min = "10", step = "10", placeholder = "Sök på antal kvm" })
+            </form>
+            <form autocomplete="off" method="post" action="" style="outline:none">
+                <p>Högst m²:</p>
+                @Html.TextBox("sortLivingAreaMax", "", new { type = "number", min = "10", step = "10", placeholder = "Sök på antal kvm" })
+            </form>
+        </div>
+
+        @if (Model.Count() == 0)
+         {
+            <div class="no_result">
+                <h4>Inga lediga objekt funna inom dina kriterier</h4>
+                <p>Bredda din sökning eller kom förbi vid ett senare tillfälle.</p>
+            </div>
+         }
+
+        else
+        {
+          <ul class="cards">
+            @foreach (var item in Model)
+             {
+               <li class="cards_item">
+                <a a asp-action="Details" asp-route-id="@item.HouseObjectId">
+                 <div class="card">
+                    <div class="card_image"> <img class="img-card" src="@Html.DisplayFor(modelItem => item.Images)"></div>
+                     <div class="card_content">
+                        <h2 class="card_title">@Html.DisplayFor(modelItem => item.Address)</h2>
+                         <p class="card_text">@Html.DisplayFor(modelItem => item.Price) SEK</p>
+                         <p class="card_text">Area: @Html.DisplayFor(modelItem => item.LivingArea) m²</p>
+                         <p class="card_text">Rooms: @Html.DisplayFor(modelItem => item.Rooms)</p>
+                    </div>
+                 </div>
+                </a>
+               </li>
+             }
+
+          </ul>
+        }
+    </div>
+</body>
+</html>

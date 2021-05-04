@@ -1,0 +1,165 @@
+﻿@model HemnetMVC.Models.HouseObjectViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<head>
+    <link rel="stylesheet" href="~/css/IndexFinal.css" />
+    <script>
+
+        // Initialize and add the map
+        function initMap() {
+            // The location of setCoordinates
+            const setCoordinates = { lat:@Model.Latitude , lng: @Model.Longitude };
+            // The map, centered at setCoordinates
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 8,
+                center: setCoordinates,
+            });
+            // The marker, positioned at setCoordinates
+            const marker = new google.maps.Marker({
+                position: setCoordinates,
+                map: map,
+            });
+        }
+    </script>
+    <style type="text/css">
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px;
+            /* The height is 400 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+        }
+    </style>
+
+
+</head>
+
+<h1>@Html.DisplayFor(model => model.Address)</h1>
+
+<div>    
+    <hr />
+    <div class="img-container">
+        <img class="col-sm-10"
+             src="@Html.DisplayFor(model => model.Images)" />
+    </div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Address:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            Utgångspris:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price) SEK
+        </dd>
+        <dt class="col-sm-2">
+            Bostadstyp:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HousingType)
+        </dd>
+        <dt class="col-sm-2">
+            Upplåtelseform:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FormOfLease)
+        </dd>
+        <dt class="col-sm-2">
+            Antal rum:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rooms) Rum
+        </dd>
+        <dt class="col-sm-2">
+            Boarea:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LivingArea) m²
+        </dd>
+        <dt class="col-sm-2">
+            Biarea:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BiArea) m²
+        </dd>
+        <dt class="col-sm-2">
+            Tomtarea:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PlotArea) m²
+        </dd>
+        <dt class="col-sm-2">
+            Byggår:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BuildYear)
+        </dd>
+        <dt class="col-sm-2">
+            Beskrivning:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descriptions)
+        </dd>
+        <dt class="col-sm-2">
+            Visnings datum:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ShowingDate)
+        </dd>
+        <dt class="col-sm-2">
+            Mäklare:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Brooker.FirstName)
+            <br />
+            @Html.DisplayFor(model => model.Brooker.Email)
+        </dd>
+    </dl>
+</div>
+<div id="map"></div>
+<br/>
+
+<div class="row">
+    <div class="col-md-4">
+        <h4>Intresseanmälan</h4>
+        <form asp-action="RegOfIntrest" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group" hidden>
+                <label asp-for="HouseObjectId" class="control-label"></label>
+                <input asp-for="HouseObjectId" class="form-control" />
+                <span asp-validation-for="HouseObjectId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" required/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label">Förnamn</label>
+                <input asp-for="FirstName" class="form-control" required/>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">Efternamn</label>
+                <input asp-for="LastName" class="form-control" required/>
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Skicka in" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>    
+    
+<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-i6OyTv8dONZ3tJZf0UeGcsEWd9nP2NU&callback=initMap&libraries=&v=weekly"
+        async></script>
+<div>
+    <a asp-action="Index">Tillbaka till bostadsvyn</a>
+</div>

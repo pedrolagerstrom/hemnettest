@@ -1,0 +1,60 @@
+﻿@model IEnumerable<HemnetMVC.Models.HouseObjectViewModel>
+
+@{
+    ViewData["Title"] = "Map";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/IndexFinal.css">
+    <script>
+
+        // Initialize and add the map
+        function initMap() {
+            const setCoordinates = { lat: 59.334591, lng: 18.063240 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 10,
+                center: setCoordinates,
+            });
+
+         @foreach(var item in Model){
+
+            <text>
+            var marker = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(@item.Latitude, @item.Longitude),
+                title: "Pris: @item.Price SEK"
+            });
+            </text>
+          }
+        }
+    </script>
+
+    <style type="text/css">
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 600px;
+            /* The height is 400 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Bostäder till salu </h1>
+    <h4></h4>
+
+    <div id="map"></div>
+</body>
+
+</html>
+
+<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-i6OyTv8dONZ3tJZf0UeGcsEWd9nP2NU&callback=initMap&libraries=&v=weekly"
+        async></script>

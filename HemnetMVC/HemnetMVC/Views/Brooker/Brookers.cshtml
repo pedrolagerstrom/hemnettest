@@ -1,0 +1,29 @@
+﻿@model IEnumerable<HemnetMVC.Models.BrookerViewModel>
+
+@{
+    ViewData["Title"] = "Brookers";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/IndexFinal.css">
+</head>
+
+
+<body>
+    <div class="brooker-header">
+        <h1>Våra Mäklare</h1>
+    </div>
+
+@foreach (var item in Model)
+{
+    <div class="profile-card">
+        <h2 class="">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</h2>
+        <p class="">@Html.DisplayFor(modelItem => item.Email)</p>
+    </div>
+}
+</body>
+</html>
