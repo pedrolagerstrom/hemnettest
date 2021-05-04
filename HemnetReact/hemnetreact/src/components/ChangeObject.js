@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-const url = process.env.REACT_APP_API_URL;
+const url = "https://hemnetapi.azurewebsites.net/api/HouseObjects"
 
 const ChangeObject = () => {
   let { houseObjectId } = useParams();

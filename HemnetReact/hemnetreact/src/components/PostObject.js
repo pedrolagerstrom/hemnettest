@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const url = process.env.REACT_APP_API_URL;
+const url = "https://hemnetapi.azurewebsites.net/api/HouseObjects"
 
 const PostObject = () => {
   const token = localStorage.getItem("myToken");
