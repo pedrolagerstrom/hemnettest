@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./styles/style.css";
 
-const url = process.env.REACT_APP_API_URL;
+const url = "https://hemnetapi.azurewebsites.net/api/RegOfIntrests"
 
 const RegOfIntrest = () => {
   const [regOfIntrest, setRegOfIntrest] = useState([]);
