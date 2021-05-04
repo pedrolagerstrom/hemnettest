@@ -44,7 +44,7 @@ const ChangeObject = () => {
         })
       );
     }
-  }, []);
+  }, [getObjectURL, history, token]);
 
   const SubmitForm = (event) => {
     event.preventDefault();

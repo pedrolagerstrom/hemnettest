@@ -26,7 +26,7 @@ const RegOfIntrest = () => {
         })
       );
     }
-  }, []);
+  }, [history, token]);
 
   return (
     <div className="container">

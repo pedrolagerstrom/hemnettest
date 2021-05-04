@@ -22,7 +22,7 @@ const GetObject = () => {
         })
       );
     }
-  }, []);
+  }, [history, token]);
 
   return (
     <div className="container">
