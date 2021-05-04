@@ -10,6 +10,7 @@ const GetObject = () => {
   let history = useHistory();
 
   useEffect(() => {
+    console.log(url);
     if (token === null) {
       history.push(`/`);
       alert("Du måste logga in");
