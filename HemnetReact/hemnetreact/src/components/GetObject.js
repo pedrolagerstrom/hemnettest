@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./styles/style.css";
 
-const url = "https://hemnetapi.azurewebsites.net/api/HouseObjects"
+const url = process.env.REACT_APP_API_URL;
 
 const GetObject = () => {
   const [objectState, setObjectState] = useState([]);
